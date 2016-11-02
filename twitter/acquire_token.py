@@ -6,21 +6,24 @@ import sys
 import json
 import requests
 
-# path to config file
-credentials_path = '../credentials.json'
-
-# load config file
-with open(credentials_path) as credentials_file:
-  credentials = json.load(credentials_file)
-
-# keys designation in config file
+# keys in json file
 key = 'consumer_key'
 secret = 'consumer_secret'
 
-# validate config file
-if key not in credentials or secret not in credentials:
-  print('[ERR] Failure to retrieve required keys')
-  sys.exit(1)
+def load_credentials(path):
+  # load
+  with open(path) as credentials_file:
+    credentials = json.load(credentials_file)
+
+  # validate
+  if key not in credentials or secret not in credentials:
+    print('[ERR] Failure to retrieve required keys')
+    sys.exit(1)
+
+  return credentials
+
+# load
+credentials = load_credentials('./credentials/credentials.json')
 
 # request
 url = 'https://api.twitter.com/oauth2/token'
@@ -36,11 +39,11 @@ if r.status_code is not 200:
 # convert string to json structure
 access_token = json.loads(r.text)
 
-# path to output file 
-access_token_path = '../access_token.json'
+# delete unnecessary keys
+del access_token['token_type']
 
 # open output file (override)
-with open(access_token_path, 'w') as access_token_file:
+with open('./credentials/access_token.json', 'w') as access_token_file:
     json.dump(access_token, access_token_file)
 
 print('[INFO] Success')
