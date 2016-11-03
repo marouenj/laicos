@@ -68,8 +68,12 @@ for query in queries:
   r = requests.get(url, params=params, headers=headers)
 
   # check response status
+  if r.status_code is 429:
+    print('[WARN] Too many request')
+    sys.exit(429)
   if r.status_code is not 200:
     print('[ERR] Failure to acquire list of followers')
+    print(r.status_code)
     print(r.text)
     sys.exit(1)
 
