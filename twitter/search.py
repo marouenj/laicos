@@ -85,23 +85,8 @@ for query in queries:
   # update since_id
   tweets['since_id'] = new_tweets['search_metadata']['max_id_str']
 
-  # delete not needed keys
-  statuses = new_tweets['statuses'];
-  for status in statuses:
-    del status['id']
-    del status['truncated']
-    del status['metadata']
-    del status['in_reply_to_status_id']
-    del status['in_reply_to_status_id_str']
-    del status['in_reply_to_user_id']
-    del status['in_reply_to_user_id_str']
-    del status['in_reply_to_screen_name']
-    del status['user']['id']
-    del status['geo']
-    del status['coordinates']
-
   # append list of tweets
-  tweets['tweets'].extend(statuses)
+  tweets['tweets'].extend(new_tweets['statuses'])
 
   with open('./tweets/' + query[i] + '.json', 'w') as tweets_file:
     json.dump(tweets, tweets_file)
