@@ -81,6 +81,7 @@ for query in queries:
 
   # convert string to json structure
   new_tweets = json.loads(r.text)
+  print(len(new_tweets['statuses']))
 
   # update since_id
   tweets['since_id'] = new_tweets['search_metadata']['max_id_str']
