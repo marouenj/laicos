@@ -2,5 +2,9 @@
   {
     "id": "url_facebook",
     "q": "url:facebook"
+  },
+  {
+    "id": "url_youtube",
+    "q": "url:youtube"
   }
 ]
