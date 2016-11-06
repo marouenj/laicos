@@ -2,3 +2,4 @@
 credentials.json
 access_token.json
 *_followers.json
+__pycache__
