@@ -4,7 +4,7 @@ import json
 import re
 import jellyfish
 
-import myurl
+import my_url
 
 # load tweets
 with open('./tweets/url_facebook.json', 'r') as tweets_file:
@@ -20,7 +20,7 @@ for tweet in tweets['tweets']:
     screen_name = user['screen_name']
     url = tweet['entities']['urls'][0]
     expanded_url = url['expanded_url']
-    expanded_url = myurl.expand(expanded_url)
+    expanded_url = my_url.expand(expanded_url)
     url_match = re.match('^.*www.facebook.com/(.*)/posts/.*$', expanded_url)
     if url_match:
       fb_name = url_match.group(1)
